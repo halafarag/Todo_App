@@ -1,0 +1,13 @@
+<header class="header" data-reactid=".0.0">
+  <h1 data-reactid=".0.0.0">todos</h1>
+  <input
+    class="new-todo"
+    placeholder="What needs to be done?"
+    value=""
+    data-reactid=".0.0.1"
+    autoFocus
+    [value]="text"
+    (keyup)="changText($event)"
+    (keyup.enter)="addTodo()"
+  />
+</header>
