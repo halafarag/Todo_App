@@ -1,1 +1,23 @@
-<li>{{ todoProps.text }}</li>
+<!-- <li>{{ todoProps.text }}</li>
+<span>{{ todoProps.isCompleted }}</span> -->
+<!-- in mode edit section (li) will hidden -->
+<li [ngClass]="{ editing: isEditingProps }">
+  <div class="view">
+    <input
+      type="checkbox"
+      class="toggle"
+      [checked]="todoProps.isCompleted"
+      (change)="toggleTodo()"
+    />
+    <label (dblclick)="editTodo()">{{ todoProps.text }}</label>
+    <button class="destroy" (click)="removeTodo()"></button>
+  </div>
+  <ng-container *ngIf="isEditingProps"
+    ><input
+      class="edit"
+      #textInput
+      [value]="editingText"
+      (keyup)="changText($event)"
+      (keyup.enter)="changTodo()"
+  /></ng-container>
+</li>

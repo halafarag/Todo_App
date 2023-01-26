@@ -1,6 +1,19 @@
-<ul class="todo-list">
-  <app-todos-todo
-    *ngFor="let todo of visibleTodo$ | async"
-    [todo]="todo"
-  ></app-todos-todo>
-</ul>
+<!-- when we dont have any visible todo hidden:should be true -->
+<section class="main" [ngClass]="{ hidden: noTodoClass$ | async }">
+  <input
+    class="toggle-all"
+    id="toggle-all"
+    type="checkbox"
+    [checked]="isAllTodoSelected$ | async"
+    (change)="toggleAllTodos($event)"
+  />
+  <label for="toggle-all"> Mark All As Completed</label>
+  <ul class="todo-list">
+    <app-todos-todo
+      *ngFor="let todo of visibleTodo$ | async"
+      [todo]="todo"
+      [isEditing]="editingId === todo.id"
+      (setEditID)="setEditID($event)"
+    ></app-todos-todo>
+  </ul>
+</section>

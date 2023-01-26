@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { TodosService } from '../../services/todos.service';
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-todos-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  text: string = ' ';
+  text: string = '';
   constructor(private todoServic: TodosService) {
     this.todoServic.todos$.subscribe((todos) => {
       console.log(todos);

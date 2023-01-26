@@ -24,4 +24,49 @@ export class TodosService {
     //to update behavior subject
     this.todos$.next(updateTodo);
   }
+  //toggel all
+  toggleAll(isCompleted: boolean): void {
+    console.log(isCompleted);
+    const updateTodo = this.todos$.getValue().map((todo) => {
+      return { ...todo, isCompleted };
+    });
+    console.log(updateTodo);
+    this.todos$.next(updateTodo);
+  }
+  //filter
+  changFilter(filterName: FilterEnum): void {
+    this.filter$.next(filterName);
+  }
+  //put new text after editing in the input
+  //find todo by id and ubdated
+  changTodo(id: string, text: string): void {
+    const updateTodo = this.todos$.getValue().map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          text,
+        };
+      }
+      return todo;
+    });
+
+    this.todos$.next(updateTodo);
+    console.log(updateTodo);
+  }
+  //delete
+  removeTodo(id: string): void {
+    const updateTodo = this.todos$.getValue().filter((todo) => todo.id !== id);
+    this.todos$.next(updateTodo);
+  }
+  //toggle
+  toggleTodo(id: string): void {
+    const updateTodo = this.todos$.getValue().map((todo) => {
+      if (todo.id === id) {
+        return { ...todo, isCompleted: !todo.isCompleted };
+      }
+      return todo;
+    });
+    console.log(updateTodo);
+    this.todos$.next(updateTodo);
+  }
 }
